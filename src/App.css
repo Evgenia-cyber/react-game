@@ -2,6 +2,9 @@ body {
   background-color: rgb(190, 248, 156);
   color: #021a09;
 }
+.game:focus {
+  outline: none;
+}
 .wrapper {
   margin-top: 2%;
   display: flex;

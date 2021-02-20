@@ -1,14 +1,21 @@
 import React from 'react';
 
 import {
-  FIELD_LENGTH,
+  FIELD_HEIGHT,
   FIELD_WIDTH,
   SNAKE_HEAD,
   APPLE,
   SNAKE_BODY,
   SPEED,
   CURRENT_DIRECTION,
-  CELL,
+  UP_KEYCODE,
+  DOWN_KEYCODE,
+  LEFT_KEYCODE,
+  RIGHT_KEYCODE,
+  UP_DIRECTION,
+  DOWN_DIRECTION,
+  LEFT_DIRECTION,
+  RIGHT_DIRECTION,
 } from './constants';
 import './App.css';
 import appleImg from './assets/img/apple.svg';
@@ -20,37 +27,70 @@ const App = () => {
   const style = {
     field: {
       width: `${FIELD_WIDTH}px`,
-      height: `${FIELD_LENGTH}px`,
+      height: `${FIELD_HEIGHT}px`,
     },
   };
 
   const [snakeHead, setSnakeHead] = React.useState(SNAKE_HEAD);
-  // { left: 190, top: 200 };
   const [snakeBodyItems, setSnakeBodyItems] = React.useState(SNAKE_BODY);
-  // [
-  //   { left: 170, top: 200 },
-  //   { left: 150, top: 200 },
-  // ];
-  const [direction, setDirection] = React.useState(CURRENT_DIRECTION); //{ left: CELL, top: 0 }
+  const [direction, setDirection] = React.useState(CURRENT_DIRECTION);
 
   React.useEffect(() => {
-    const interval = setInterval(() => {
+    const moveSnake = (currentDirection) => {
+      setSnakeBodyItems((snakeBodyItems) => {
+        let newSnakeBody = [...snakeBodyItems];
+        newSnakeBody.pop();
+        newSnakeBody.unshift(snakeHead);
+        // console.log('newSnakeBody', newSnakeBody);
+        return newSnakeBody;
+      });
       setSnakeHead((snakeHead) => ({
-        left: snakeHead.left + CELL,
-        top: snakeHead.top,
+        left: snakeHead.left + currentDirection.left,
+        top: snakeHead.top + currentDirection.top,
       }));
-      setSnakeBodyItems((snakeBodyItems) =>
-        snakeBodyItems.map((item) => ({
-          left: item.left + CELL,
-          top: item.top,
-        })),
-      );
+
+      // setSnakeHead((snakeHead) => {
+      //   console.log('snakeHead', snakeHead);
+      //   const newSnakeHead = {
+      //     left: snakeHead.left + currentDirection.left,
+      //     top: snakeHead.top + currentDirection.top,
+      //   };
+      //   console.log('newSnakeHead', newSnakeHead);
+      //   return newSnakeHead;
+      // });
+    };
+    const interval = setInterval(() => {
+      moveSnake(direction);//+++++++++++++++++++++++++++++++++++++++
     }, SPEED);
     return () => clearInterval(interval);
-  }, [direction]);
+  }, [direction, snakeHead]);
+  const handlerOnKeyDown = (event) => {
+    switch (event.keyCode) {
+      case UP_KEYCODE:
+        setDirection(UP_DIRECTION);
+        break;
+      case DOWN_KEYCODE:
+        setDirection(DOWN_DIRECTION);
+        break;
+      case LEFT_KEYCODE:
+        setDirection(LEFT_DIRECTION);
+        break;
+      case RIGHT_KEYCODE:
+        setDirection(RIGHT_DIRECTION);
+        break;
+      default:
+        setDirection(RIGHT_DIRECTION);
+    }
+  };
 
   return (
-    <div>
+    <div
+      className="game"
+      role="button"
+      tabIndex={0}
+      onKeyDown={(event) => handlerOnKeyDown(event)}
+      //??????для фокуса нужнен клик по div - см., достаточно ли клика по кнопке PLAY в модальном окне
+    >
       <div className="wrapper">
         <h1>SNAKE GAME</h1>
         <div className="container">
