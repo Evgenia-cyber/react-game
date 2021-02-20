@@ -6,6 +6,9 @@ import {
   SNAKE_HEAD,
   APPLE,
   SNAKE_BODY,
+  SPEED,
+  CURRENT_DIRECTION,
+  CELL,
 } from './constants';
 import './App.css';
 import appleImg from './assets/img/apple.svg';
@@ -20,6 +23,31 @@ const App = () => {
       height: `${FIELD_LENGTH}px`,
     },
   };
+
+  const [snakeHead, setSnakeHead] = React.useState(SNAKE_HEAD);
+  // { left: 190, top: 200 };
+  const [snakeBodyItems, setSnakeBodyItems] = React.useState(SNAKE_BODY);
+  // [
+  //   { left: 170, top: 200 },
+  //   { left: 150, top: 200 },
+  // ];
+  const [direction, setDirection] = React.useState(CURRENT_DIRECTION); //{ left: CELL, top: 0 }
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setSnakeHead((snakeHead) => ({
+        left: snakeHead.left + CELL,
+        top: snakeHead.top,
+      }));
+      setSnakeBodyItems((snakeBodyItems) =>
+        snakeBodyItems.map((item) => ({
+          left: item.left + CELL,
+          top: item.top,
+        })),
+      );
+    }, SPEED);
+    return () => clearInterval(interval);
+  }, [direction]);
 
   return (
     <div>
@@ -57,18 +85,17 @@ const App = () => {
 
           <div style={style.field} className="game_field">
             <div className="snake">
-
               <div
                 className="snake_head game_item"
                 style={{
-                  left: `${SNAKE_HEAD.left}px`,
-                  top: `${SNAKE_HEAD.top}px`,
+                  left: `${snakeHead.left}px`,
+                  top: `${snakeHead.top}px`,
                 }}
               ></div>
 
-              {SNAKE_BODY.map((item, index) => (
+              {snakeBodyItems.map((item, index) => (
                 <div
-                  key={index}
+                  key={index + '' + item.left + item.top}
                   className="snake_body game_item"
                   style={{
                     left: `${item.left}px`,
@@ -77,7 +104,7 @@ const App = () => {
                 ></div>
               ))}
             </div>
-            
+
             <div
               className="apple game_item"
               style={{ left: `${APPLE.left}px`, top: `${APPLE.top}px` }}
