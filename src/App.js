@@ -3,6 +3,7 @@ import React from 'react';
 import {
   FIELD_HEIGHT,
   FIELD_WIDTH,
+  STEP,
   SNAKE_HEAD,
   APPLE,
   SNAKE_BODY,
@@ -34,36 +35,51 @@ const App = () => {
   const [snakeHead, setSnakeHead] = React.useState(SNAKE_HEAD);
   const [snakeBodyItems, setSnakeBodyItems] = React.useState(SNAKE_BODY);
   const [direction, setDirection] = React.useState(CURRENT_DIRECTION);
+  const [apple, setApple] = React.useState(APPLE);
+  const [score, setScore] = React.useState(0);
 
   React.useEffect(() => {
-    const moveSnake = (currentDirection) => {
+
+    const getRandom = (max, step) => {
+      return Math.floor(Math.random() * (max / step)) * step;
+    };
+
+    const createApple = () => {
+      let newApple = {
+        left: getRandom(FIELD_WIDTH, STEP),
+        top: getRandom(FIELD_HEIGHT, STEP),
+      };  
+        return newApple;
+    };
+
+    const moveSnake = () => {
       setSnakeBodyItems((snakeBodyItems) => {
         let newSnakeBody = [...snakeBodyItems];
-        newSnakeBody.pop();
+        const isAppleEaten =
+          snakeHead.left === apple.left && snakeHead.top === apple.top;
+        if (isAppleEaten) {
+          console.log(isAppleEaten)
+          setScore(score + 1);
+          setApple(createApple());
+        } else {
+          newSnakeBody.pop();
+        }
         newSnakeBody.unshift(snakeHead);
-        // console.log('newSnakeBody', newSnakeBody);
         return newSnakeBody;
       });
       setSnakeHead((snakeHead) => ({
-        left: snakeHead.left + currentDirection.left,
-        top: snakeHead.top + currentDirection.top,
+        left: snakeHead.left + direction.left,
+        top: snakeHead.top + direction.top,
       }));
-
-      // setSnakeHead((snakeHead) => {
-      //   console.log('snakeHead', snakeHead);
-      //   const newSnakeHead = {
-      //     left: snakeHead.left + currentDirection.left,
-      //     top: snakeHead.top + currentDirection.top,
-      //   };
-      //   console.log('newSnakeHead', newSnakeHead);
-      //   return newSnakeHead;
-      // });
     };
+
     const interval = setInterval(() => {
-      moveSnake(direction);//+++++++++++++++++++++++++++++++++++++++
+      moveSnake(); //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     }, SPEED);
+
     return () => clearInterval(interval);
-  }, [direction, snakeHead]);
+  }, [direction, snakeHead,snakeBodyItems, apple,score]);
+
   const handlerOnKeyDown = (event) => {
     switch (event.keyCode) {
       case UP_KEYCODE:
@@ -98,7 +114,7 @@ const App = () => {
             <div className="left">
               <div className="toolbar_item">
                 <img className="score_img" src={appleImg} alt="score" />
-                <span className="score">1</span>
+                <span className="score">{score}</span>
               </div>
               <div className="toolbar_item">
                 <img
@@ -147,7 +163,7 @@ const App = () => {
 
             <div
               className="apple game_item"
-              style={{ left: `${APPLE.left}px`, top: `${APPLE.top}px` }}
+              style={{ left: `${apple.left}px`, top: `${apple.top}px` }}
             >
               <img src={appleImg} alt="apple" />
             </div>
