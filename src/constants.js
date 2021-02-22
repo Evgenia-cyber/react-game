@@ -1,12 +1,22 @@
-const FIELD_WIDTH =400;
-const FIELD_HEIGHT = 400;
+// const FIELD_WIDTH =400;
+// const FIELD_HEIGHT = 400;
+// const STEP = 20;
+// const SPEED = 1000; 
+// const APPLE = { left: 280, top: 100 };
+// const SNAKE_HEAD = { left: 180, top: 200 };
+// const SNAKE_BODY = [
+//   { left: 160, top: 200 },
+//   { left: 140, top: 200 },
+// ];
+const FIELD_WIDTH =100;
+const FIELD_HEIGHT = 100;
 const STEP = 20;
 const SPEED = 1000; 
-const APPLE = { left: 280, top: 100 };
-const SNAKE_HEAD = { left: 180, top: 200 };
+const APPLE = { left: 80, top: 0 };
+const SNAKE_HEAD = { left: 80, top: 20 };
 const SNAKE_BODY = [
-  { left: 160, top: 200 },
-  { left: 140, top: 200 },
+  { left: 60, top: 20 },
+  { left: 40, top: 20},
 ];
 
 const UP_KEYCODE = 38;

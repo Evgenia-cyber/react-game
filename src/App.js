@@ -39,17 +39,26 @@ const App = () => {
   const [score, setScore] = React.useState(0);
 
   React.useEffect(() => {
-
     const getRandom = (max, step) => {
       return Math.floor(Math.random() * (max / step)) * step;
     };
 
+    const checkIsAppleCreatedInSnakeBody = (newApple) => {
+      const snake = [...snakeBodyItems];
+      snake.unshift(snakeHead);
+      return snake.some(
+        (item) => item.left === newApple.left && item.top === newApple.top,
+      );
+    };
     const createApple = () => {
       let newApple = {
         left: getRandom(FIELD_WIDTH, STEP),
         top: getRandom(FIELD_HEIGHT, STEP),
-      };  
-        return newApple;
+      };
+      if (checkIsAppleCreatedInSnakeBody(newApple)) {
+        newApple = createApple();
+      }
+      return newApple;
     };
 
     const moveSnake = () => {
@@ -58,9 +67,9 @@ const App = () => {
         const isAppleEaten =
           snakeHead.left === apple.left && snakeHead.top === apple.top;
         if (isAppleEaten) {
-          console.log(isAppleEaten)
           setScore(score + 1);
-          setApple(createApple());
+          const newApple = createApple();
+          setApple(newApple);
         } else {
           newSnakeBody.pop();
         }
@@ -78,7 +87,7 @@ const App = () => {
     }, SPEED);
 
     return () => clearInterval(interval);
-  }, [direction, snakeHead,snakeBodyItems, apple,score]);
+  }, [direction, snakeHead, snakeBodyItems, apple, score]);
 
   const handlerOnKeyDown = (event) => {
     switch (event.keyCode) {
