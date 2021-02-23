@@ -92,16 +92,16 @@ const App = () => {
   const handlerOnKeyDown = (event) => {
     switch (event.keyCode) {
       case UP_KEYCODE:
-        setDirection(UP_DIRECTION);
+        if(direction!==DOWN_DIRECTION){setDirection(UP_DIRECTION);}
         break;
       case DOWN_KEYCODE:
-        setDirection(DOWN_DIRECTION);
+        if(direction!==UP_DIRECTION){setDirection(DOWN_DIRECTION);}
         break;
       case LEFT_KEYCODE:
-        setDirection(LEFT_DIRECTION);
+        if(direction!==RIGHT_DIRECTION){setDirection(LEFT_DIRECTION);}
         break;
       case RIGHT_KEYCODE:
-        setDirection(RIGHT_DIRECTION);
+        if(direction!==LEFT_DIRECTION) {setDirection(RIGHT_DIRECTION);}
         break;
       default:
         setDirection(RIGHT_DIRECTION);
