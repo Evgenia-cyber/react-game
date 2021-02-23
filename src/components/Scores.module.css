@@ -1,0 +1,14 @@
+.left{
+  display: flex;
+}
+.toolbar_item {
+  padding: 0 15px;
+}
+.score_img,
+.bestscore_img {
+  width: 25px;
+}
+.score {
+  font-weight: 900;
+  font-size: 20px;
+}

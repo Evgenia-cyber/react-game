@@ -18,11 +18,13 @@ import {
   LEFT_DIRECTION,
   RIGHT_DIRECTION,
 } from './constants';
-import './App.css';
 import appleImg from './assets/img/apple.svg';
-import awardImg from './assets/img/award.svg';
 import volumeImg from './assets/img/sound.svg';
 import closeImg from './assets/img/close.svg';
+import Modal from './components/Modal';
+
+import './App.css';
+import Scores from './components/Scores';
 
 const App = () => {
   const style = {
@@ -32,11 +34,15 @@ const App = () => {
     },
   };
 
+  const fieldRef = React.useRef();
+
   const [snakeHead, setSnakeHead] = React.useState(SNAKE_HEAD);
   const [snakeBodyItems, setSnakeBodyItems] = React.useState(SNAKE_BODY);
   const [direction, setDirection] = React.useState(CURRENT_DIRECTION);
   const [apple, setApple] = React.useState(APPLE);
   const [score, setScore] = React.useState(0);
+  const [isGameEnd, setIsGameEnd] = React.useState(false);
+  const [isFirstStart, setIsFirstStart] = React.useState(true);
 
   React.useEffect(() => {
     const getRandom = (max, step) => {
@@ -61,6 +67,20 @@ const App = () => {
       return newApple;
     };
 
+    const checkSelfCollision = () => {
+      return snakeBodyItems.some(
+        (item) => item.left === snakeHead.left && item.top === snakeHead.top,
+      );
+    };
+    const checkCollisionWithBoundaries = () => {
+      return (
+        snakeHead.left < 0 ||
+        snakeHead.top < 0 ||
+        snakeHead.left > FIELD_WIDTH - STEP ||
+        snakeHead.top > FIELD_HEIGHT - STEP
+      );
+    };
+
     const moveSnake = () => {
       setSnakeBodyItems((snakeBodyItems) => {
         let newSnakeBody = [...snakeBodyItems];
@@ -83,57 +103,76 @@ const App = () => {
     };
 
     const interval = setInterval(() => {
-      moveSnake(); //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      if (isFirstStart === isGameEnd) {
+        moveSnake();
+      }
+      if (checkCollisionWithBoundaries() || checkSelfCollision()) {
+        setIsGameEnd(true);
+      }
     }, SPEED);
 
     return () => clearInterval(interval);
-  }, [direction, snakeHead, snakeBodyItems, apple, score]);
+  }, [
+    direction,
+    snakeHead,
+    snakeBodyItems,
+    apple,
+    score,
+    isGameEnd,
+    isFirstStart,
+  ]);
 
   const handlerOnKeyDown = (event) => {
     switch (event.keyCode) {
       case UP_KEYCODE:
-        if(direction!==DOWN_DIRECTION){setDirection(UP_DIRECTION);}
+        if (direction !== DOWN_DIRECTION) {
+          setDirection(UP_DIRECTION);
+        }
         break;
       case DOWN_KEYCODE:
-        if(direction!==UP_DIRECTION){setDirection(DOWN_DIRECTION);}
+        if (direction !== UP_DIRECTION) {
+          setDirection(DOWN_DIRECTION);
+        }
         break;
       case LEFT_KEYCODE:
-        if(direction!==RIGHT_DIRECTION){setDirection(LEFT_DIRECTION);}
+        if (direction !== RIGHT_DIRECTION) {
+          setDirection(LEFT_DIRECTION);
+        }
         break;
       case RIGHT_KEYCODE:
-        if(direction!==LEFT_DIRECTION) {setDirection(RIGHT_DIRECTION);}
+        if (direction !== LEFT_DIRECTION) {
+          setDirection(RIGHT_DIRECTION);
+        }
         break;
       default:
         setDirection(RIGHT_DIRECTION);
     }
   };
 
+  const handleOnPlayBtnClick = () => {
+    fieldRef.current.focus();
+    setSnakeHead(SNAKE_HEAD);
+    setSnakeBodyItems(SNAKE_BODY);
+    setApple(APPLE);
+    setDirection(CURRENT_DIRECTION);
+    setIsGameEnd(false);
+    setIsFirstStart(false);
+    setScore(0);
+  };
+
   return (
     <div
+      ref={fieldRef}
       className="game"
       role="button"
       tabIndex={0}
       onKeyDown={(event) => handlerOnKeyDown(event)}
-      //??????для фокуса нужнен клик по div - см., достаточно ли клика по кнопке PLAY в модальном окне
     >
       <div className="wrapper">
         <h1>SNAKE GAME</h1>
         <div className="container">
           <div className="toolbar">
-            <div className="left">
-              <div className="toolbar_item">
-                <img className="score_img" src={appleImg} alt="score" />
-                <span className="score">{score}</span>
-              </div>
-              <div className="toolbar_item">
-                <img
-                  className="bestscore_img"
-                  src={awardImg}
-                  alt="best score"
-                />
-                <span className="score">100</span>
-              </div>
-            </div>
+            <Scores score={score} />
             <div className="right">
               <div className="volume toolbar_item">
                 <img src={volumeImg} alt="volume" />
@@ -149,6 +188,12 @@ const App = () => {
           </div>
 
           <div style={style.field} className="game_field">
+            <div
+              className="apple game_item"
+              style={{ left: `${apple.left}px`, top: `${apple.top}px` }}
+            >
+              <img src={appleImg} alt="apple" />
+            </div>
             <div className="snake">
               <div
                 className="snake_head game_item"
@@ -169,21 +214,17 @@ const App = () => {
                 ></div>
               ))}
             </div>
-
-            <div
-              className="apple game_item"
-              style={{ left: `${apple.left}px`, top: `${apple.top}px` }}
-            >
-              <img src={appleImg} alt="apple" />
-            </div>
           </div>
         </div>
       </div>
-      {/* /////// */}
-      {/* <div className="modal active">
-        <button className="play_btn"><span>PLAY</span></button>
-      </div> */}
-      {/* /////// */}
+
+      {isGameEnd !== isFirstStart && (
+        <Modal
+          handleOnPlayBtnClick={handleOnPlayBtnClick}
+          isGameEnd={isGameEnd}
+          score={score}
+        />
+      )}
     </div>
   );
 };
