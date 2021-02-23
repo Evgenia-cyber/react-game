@@ -40,9 +40,19 @@ const App = () => {
   const [snakeBodyItems, setSnakeBodyItems] = React.useState(SNAKE_BODY);
   const [direction, setDirection] = React.useState(CURRENT_DIRECTION);
   const [apple, setApple] = React.useState(APPLE);
+  const [allScores, setAllScores] = React.useState([]);
   const [score, setScore] = React.useState(0);
+  const [bestScore, setBestScore] = React.useState(0);
   const [isGameEnd, setIsGameEnd] = React.useState(false);
   const [isFirstStart, setIsFirstStart] = React.useState(true);
+
+  React.useEffect(() => {
+    if (window.localStorage.getItem('scores') !== null) {
+      const SCORES = JSON.parse(window.localStorage.getItem('scores'));
+      setBestScore(SCORES[0]);
+      setAllScores(SCORES);
+    }
+  }, [isGameEnd]);
 
   React.useEffect(() => {
     const getRandom = (max, step) => {
@@ -172,7 +182,7 @@ const App = () => {
         <h1>SNAKE GAME</h1>
         <div className="container">
           <div className="toolbar">
-            <Scores score={score} />
+            <Scores score={score} bestScore={bestScore} />
             <div className="right">
               <div className="volume toolbar_item">
                 <img src={volumeImg} alt="volume" />
@@ -223,8 +233,21 @@ const App = () => {
           handleOnPlayBtnClick={handleOnPlayBtnClick}
           isGameEnd={isGameEnd}
           score={score}
+          bestScore={bestScore}
+          allScores={allScores}
+          setBestScore={setBestScore}
         />
       )}
+      <div className="attributes">
+        Icons made by{' '}
+        <a href="https://www.freepik.com" title="Freepik">
+          Freepik
+        </a>{' '}
+        from{' '}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
+      </div>
     </div>
   );
 };

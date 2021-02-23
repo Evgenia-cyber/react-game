@@ -1,0 +1,7 @@
+.advanced_img {
+  width: 32px;
+  cursor: pointer;
+}
+.advanced_img:hover {
+  transform: scale(1.1);
+}

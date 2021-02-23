@@ -21,7 +21,7 @@
    transition: all 0.6s ease;
  }
  .play_btn {
-   margin-top: 20px;
+   margin: 20px 0 30px;
    cursor: pointer;
    background-size: 220%;
    border-radius: 10px;
@@ -46,3 +46,8 @@
    border: none;
    box-shadow: 0 5px 5px -5px;
  }
+ .advanced{
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+}
