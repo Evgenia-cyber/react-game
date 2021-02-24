@@ -161,6 +161,9 @@ const App = () => {
     setIsFirstStart(false);
     setScore(0);
   };
+  const handlerOnCloseClick = () => {
+    setIsGameEnd(true);
+  };
 
   return (
     <div
@@ -183,7 +186,7 @@ const App = () => {
                   <span className="volume-control_slider"></span>
                 </div> */}
               </div>
-              <div className="close toolbar_item">
+              <div className="close toolbar_item" onClick={handlerOnCloseClick}>
                 <img src={closeImg} alt="close" />
               </div>
             </div>
@@ -226,7 +229,6 @@ const App = () => {
           isGameEnd={isGameEnd}
           score={score}
           bestScore={bestScore}
-          // allScores={allScores}
           setBestScore={setBestScore}
         />
       )}

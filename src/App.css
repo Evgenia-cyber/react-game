@@ -27,6 +27,14 @@ body {
 .toolbar_item {
   padding: 0 15px;
 }
+.close img,
+.volume img {
+  cursor: pointer;
+}
+.close img:hover,
+.volume img:hover {
+  transform: scale(1.1);
+}
 .close img {
   width: 20px;
 }
@@ -76,5 +84,3 @@ body {
   border: 1px solid rgb(29, 41, 29);
   box-sizing: border-box;
 }
-
-
