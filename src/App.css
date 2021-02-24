@@ -77,12 +77,4 @@ body {
   box-sizing: border-box;
 }
 
-.attributes,
-.attributes a {
-  color: #399645;
-}
-.attributes {
-  font-size: 10px;
-  margin-left: 10px;
-}
 

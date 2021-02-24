@@ -1,9 +1,18 @@
 import React from 'react';
 import classes from './ScoresStatistics.module.css';
 import scoresImg from '../assets/img/score.svg';
+import { ALL_SCORES } from '../constants';
 
-const ScoresStatistics = ({ allScores }) => {
+const ScoresStatistics = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [updatedScores, setUpdatedScores] = React.useState(ALL_SCORES);
+
+  React.useEffect(() => {
+    if (window.localStorage.getItem('scores') !== null) {
+      const SCORES = JSON.parse(window.localStorage.getItem('scores'));
+      setUpdatedScores(SCORES);
+    }
+  }, [isModalOpen]);
 
   const handlerOnClick = () => {
     setIsModalOpen((isModalOpen) => !isModalOpen);
@@ -20,8 +29,8 @@ const ScoresStatistics = ({ allScores }) => {
       {isModalOpen && (
         <div className={classes.scores}>
           <h5>YOUR TOP 10 SCORES</h5>
-          {allScores.length &&
-            allScores.map((score, index) => (
+          {updatedScores.length &&
+            updatedScores.map((score, index) => (
               <div key={index + ' ' + score} className={classes.scores_item}>
                 <span>{index + 1}</span>
                 <span>{score}</span>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { QUANTITY_BEST_RESULTS } from '../constants';
+import { ALL_SCORES } from '../constants';
 
 import classes from './Modal.module.css';
 import Scores from './Scores';
@@ -11,25 +11,29 @@ const Modal = ({
   isGameEnd,
   score,
   bestScore,
-  allScores,
   setBestScore,
 }) => {
+  const [allScores, setAllScores] = React.useState(ALL_SCORES);
+
+  React.useEffect(() => {
+    if (window.localStorage.getItem('scores') !== null) {
+      const SCORES = JSON.parse(window.localStorage.getItem('scores'));
+      setBestScore(SCORES[0]);
+      setAllScores(SCORES);
+    }
+  }, [isGameEnd, setBestScore]);
+
   React.useEffect(() => {
     if (isGameEnd) {
       if (score > bestScore) {
         setBestScore(score);
       }
-      let scores = [];
-      if (bestScore === 0) {
-        scores = Array.from(Array(QUANTITY_BEST_RESULTS), () => 0);
-      } else {
-        scores = [score, ...allScores];
-        scores.sort((a, b) => {
-          return b - a;
-        });
-        scores.pop();
-      }
-      window.localStorage.setItem('scores', JSON.stringify(scores));
+      let storageScores = [score, ...allScores];
+      storageScores.sort((a, b) => {
+        return b - a;
+      });
+      storageScores.pop();
+      window.localStorage.setItem('scores', JSON.stringify(storageScores));
     }
   }, [allScores, bestScore, isGameEnd, score, setBestScore]);
 
@@ -42,7 +46,18 @@ const Modal = ({
       </button>
       <div className={classes.advanced}>
         <Settings />
-        <ScoresStatistics allScores={allScores} />
+        <ScoresStatistics
+        />
+      </div>
+      <div className={classes.attributes}>
+        Icons made by{' '}
+        <a href="https://www.freepik.com" title="Freepik">
+          Freepik
+        </a>{' '}
+        from{' '}
+        <a href="https://www.flaticon.com/" title="Flaticon">
+          www.flaticon.com
+        </a>
       </div>
     </div>
   );
