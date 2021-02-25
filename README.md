@@ -1,6 +1,9 @@
 
 *  Task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/react/react-game.md
 *  Deploy: https://evgenia-cyber.github.io/react-game/
+*  *  Screenshot:
+  ![screenshot](https://github.com/Evgenia-cyber/react-game/blob/react-game/screenshot.png?raw=true)
+
   
 
 ИНСТРУКЦИЯ
