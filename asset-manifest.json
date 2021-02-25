@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/react-game/static/css/main.69041ca0.chunk.css",
+    "main.js": "/react-game/static/js/main.a0e15bd4.chunk.js",
+    "main.js.map": "/react-game/static/js/main.a0e15bd4.chunk.js.map",
+    "runtime-main.js": "/react-game/static/js/runtime-main.a8de5e2f.js",
+    "runtime-main.js.map": "/react-game/static/js/runtime-main.a8de5e2f.js.map",
+    "static/js/2.95d98748.chunk.js": "/react-game/static/js/2.95d98748.chunk.js",
+    "static/js/2.95d98748.chunk.js.map": "/react-game/static/js/2.95d98748.chunk.js.map",
+    "index.html": "/react-game/index.html",
+    "static/css/main.69041ca0.chunk.css.map": "/react-game/static/css/main.69041ca0.chunk.css.map",
+    "static/js/2.95d98748.chunk.js.LICENSE.txt": "/react-game/static/js/2.95d98748.chunk.js.LICENSE.txt",
+    "static/media/apple.f25fbd1c.svg": "/react-game/static/media/apple.f25fbd1c.svg",
+    "static/media/award.f5001e76.svg": "/react-game/static/media/award.f5001e76.svg",
+    "static/media/close.7e2a977d.svg": "/react-game/static/media/close.7e2a977d.svg",
+    "static/media/dead.dd44c1ab.mp3": "/react-game/static/media/dead.dd44c1ab.mp3",
+    "static/media/eat.0ba75cb4.mp3": "/react-game/static/media/eat.0ba75cb4.mp3",
+    "static/media/github.3a5ccf39.svg": "/react-game/static/media/github.3a5ccf39.svg",
+    "static/media/move.46666ef6.mp3": "/react-game/static/media/move.46666ef6.mp3",
+    "static/media/no_sound.ddaaa467.svg": "/react-game/static/media/no_sound.ddaaa467.svg",
+    "static/media/rs_school_js.ad178c0d.svg": "/react-game/static/media/rs_school_js.ad178c0d.svg",
+    "static/media/score.61754360.svg": "/react-game/static/media/score.61754360.svg",
+    "static/media/settings.9066db49.svg": "/react-game/static/media/settings.9066db49.svg",
+    "static/media/sound.8309efb1.svg": "/react-game/static/media/sound.8309efb1.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a8de5e2f.js",
+    "static/js/2.95d98748.chunk.js",
+    "static/css/main.69041ca0.chunk.css",
+    "static/js/main.a0e15bd4.chunk.js"
+  ]
+}
