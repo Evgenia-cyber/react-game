@@ -17,14 +17,20 @@ import {
   DOWN_DIRECTION,
   LEFT_DIRECTION,
   RIGHT_DIRECTION,
+  START_VOLUME,
 } from './constants';
+import { sound } from './utils/sound';
 import appleImg from './assets/img/apple.svg';
-import volumeImg from './assets/img/sound.svg';
 import closeImg from './assets/img/close.svg';
+import deadSound from './assets/sounds/dead.mp3';
+import eatSound from './assets/sounds/eat.mp3';
+import moveSound from './assets/sounds/move.mp3';
+
 import Modal from './components/Modal';
+import Scores from './components/Scores';
+import Volume from './components/Volume';
 
 import './App.css';
-import Scores from './components/Scores';
 
 const App = () => {
   const style = {
@@ -43,8 +49,8 @@ const App = () => {
   const [score, setScore] = React.useState(0);
   const [bestScore, setBestScore] = React.useState(0);
   const [isGameEnd, setIsGameEnd] = React.useState(false);
-
   const [isFirstStart, setIsFirstStart] = React.useState(true);
+  const [volume, setVolume] = React.useState(START_VOLUME);
 
   React.useEffect(() => {
     const getRandom = (max, step) => {
@@ -89,6 +95,7 @@ const App = () => {
         const isAppleEaten =
           snakeHead.left === apple.left && snakeHead.top === apple.top;
         if (isAppleEaten) {
+          sound.playSound(eatSound, volume);
           setScore(score + 1);
           const newApple = createApple();
           setApple(newApple);
@@ -109,7 +116,11 @@ const App = () => {
         moveSnake();
       }
       if (checkCollisionWithBoundaries() || checkSelfCollision()) {
+        if (!isGameEnd) {
+          sound.playSound(deadSound, volume, true);
+        }
         setIsGameEnd(true);
+        clearInterval(interval);
       }
     }, SPEED);
 
@@ -122,9 +133,11 @@ const App = () => {
     score,
     isGameEnd,
     isFirstStart,
+    volume,
   ]);
 
   const handlerOnKeyDown = (event) => {
+    sound.playSound(moveSound, volume);
     switch (event.keyCode) {
       case UP_KEYCODE:
         if (direction !== DOWN_DIRECTION) {
@@ -179,13 +192,11 @@ const App = () => {
           <div className="toolbar">
             <Scores score={score} bestScore={bestScore} />
             <div className="right">
-              <div className="volume toolbar_item">
-                <img src={volumeImg} alt="volume" />
-                {/* <div className="volume-control">
-                  <span className="volume-control_line"></span>
-                  <span className="volume-control_slider"></span>
-                </div> */}
-              </div>
+              <Volume
+                volume={volume}
+                setVolume={setVolume}
+                fieldRef={fieldRef}
+              />
               <div className="close toolbar_item" onClick={handlerOnCloseClick}>
                 <img src={closeImg} alt="close" />
               </div>

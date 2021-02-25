@@ -27,39 +27,14 @@ body {
 .toolbar_item {
   padding: 0 15px;
 }
-.close img,
-.volume img {
+.close img {
   cursor: pointer;
 }
-.close img:hover,
-.volume img:hover {
+.close img:hover{
   transform: scale(1.1);
 }
 .close img {
   width: 20px;
-}
-.volume {
-  display: flex;
-  align-items: center;
-}
-.volume-control {
-  padding-left: 5px;
-  position: relative;
-}
-.volume-control_line {
-  display: block;
-  height: 4px;
-  width: 80px;
-  background-color: #021a09;
-}
-.volume-control_slider {
-  position: absolute;
-  display: block;
-  height: 14px;
-  width: 14px;
-  border-radius: 50%;
-  background-color: #021a09;
-  top: -5px;
 }
 .game_field {
   background-color: #64c752;

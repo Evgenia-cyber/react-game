@@ -1,7 +1,7 @@
 const FIELD_WIDTH = 400;
 const FIELD_HEIGHT = 400;
 const STEP = 20;
-const SPEED = 200; 
+const SPEED = 300;
 const APPLE = { left: 300, top: 100 };
 const SNAKE_HEAD = { left: 80, top: 300 };
 const SNAKE_BODY = [
@@ -21,7 +21,9 @@ const RIGHT_DIRECTION = { left: STEP, top: 0 };
 const CURRENT_DIRECTION = RIGHT_DIRECTION;
 
 const QUANTITY_BEST_RESULTS = 10;
-const ALL_SCORES  = Array.from(Array(QUANTITY_BEST_RESULTS), () => 0);
+const ALL_SCORES = Array.from(Array(QUANTITY_BEST_RESULTS), () => 0);
+
+const START_VOLUME = 0.1;
 
 export {
   FIELD_WIDTH,
@@ -40,5 +42,6 @@ export {
   DOWN_DIRECTION,
   LEFT_DIRECTION,
   RIGHT_DIRECTION,
-  ALL_SCORES
+  ALL_SCORES,
+  START_VOLUME,
 };

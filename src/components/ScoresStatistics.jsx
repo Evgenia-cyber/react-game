@@ -14,7 +14,7 @@ const ScoresStatistics = () => {
     }
   }, [isModalOpen]);
 
-  const handlerOnClick = () => {
+  const handlerOnMouseEvent = () => {
     setIsModalOpen((isModalOpen) => !isModalOpen);
   };
 
@@ -24,7 +24,8 @@ const ScoresStatistics = () => {
         className={classes.advanced_img}
         src={scoresImg}
         alt="best scores"
-        onClick={handlerOnClick}
+        onMouseEnter={handlerOnMouseEvent}
+        onMouseLeave={handlerOnMouseEvent}
       />
       {isModalOpen && (
         <div className={classes.scores}>
