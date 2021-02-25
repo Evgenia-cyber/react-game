@@ -1,7 +1,7 @@
 const FIELD_WIDTH = 400;
 const FIELD_HEIGHT = 400;
 const STEP = 20;
-const SPEED = 300;
+const SPEED = 200;
 const APPLE = { left: 300, top: 100 };
 const SNAKE_HEAD = { left: 80, top: 300 };
 const SNAKE_BODY = [

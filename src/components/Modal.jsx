@@ -5,6 +5,8 @@ import classes from './Modal.module.css';
 import Scores from './Scores';
 import ScoresStatistics from './ScoresStatistics';
 import Settings from './Settings';
+import githubImg from '../assets/img/github.svg';
+import schoolImg from '../assets/img/rs_school_js.svg';
 
 const Modal = ({
   handleOnPlayBtnClick,
@@ -14,7 +16,7 @@ const Modal = ({
   setBestScore,
   volume,
   setVolume,
-  setCustomVolume
+  setCustomVolume,
 }) => {
   const [allScores, setAllScores] = React.useState(ALL_SCORES);
 
@@ -48,19 +50,42 @@ const Modal = ({
         <span onClick={handleOnPlayBtnClick}>PLAY</span>
       </button>
       <div className={classes.advanced}>
-        <Settings volume={volume} setVolume={setVolume} setCustomVolume={setCustomVolume}/>
+        <Settings
+          volume={volume}
+          setVolume={setVolume}
+          setCustomVolume={setCustomVolume}
+        />
         <ScoresStatistics />
       </div>
-      <div className={classes.attributes}>
-        Icons made by{' '}
-        <a href="https://www.freepik.com" title="Freepik">
-          Freepik
-        </a>{' '}
-        from{' '}
-        <a href="https://www.flaticon.com/" title="Flaticon">
-          www.flaticon.com
-        </a>
-      </div>
+      <footer>
+        <p>
+          Author: <span className={classes.author}>Kurineva Evgenia</span>
+        </p>
+        <div className={classes.social}>
+          {' '}
+          <a href="https://github.com/Evgenia-cyber/react-game/tree/react-game">
+            <img src={githubImg} alt="github logo" />
+          </a>
+          <a href="https://rs.school/js/">
+            <img
+              className={classes.rs_school}
+              src={schoolImg}
+              alt="rs_school logo"
+            />
+          </a>
+        </div>
+        <div>
+          Icons made by{' '}
+          <a href="https://www.freepik.com" title="Freepik">
+            Freepik
+          </a>{' '}
+          from{' '}
+          <a href="https://www.flaticon.com/" title="Flaticon">
+            www.flaticon.com
+          </a>
+        </div>
+        <span>2021</span>
+      </footer>
     </div>
   );
 };

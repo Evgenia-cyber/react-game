@@ -52,14 +52,25 @@
   justify-content: space-between;
 }
 
-.attributes,
-.attributes a {
+footer {
+  font-size: 12px;
+  margin: 0 10px;
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+}
+footer a {
   color: #28522e;
 }
-.attributes {
-  font-size: 10px;
-  margin-left: 10px;
-  position: fixed;
-  bottom:5px;
-  left:0;
+footer a img {
+  height: 15px;
+}
+footer p{
+  margin: 10px 0;
+}
+.author{
+  font-weight: 700;
+}
+.rs_school {
+  padding: 0 15px 0;
 }
