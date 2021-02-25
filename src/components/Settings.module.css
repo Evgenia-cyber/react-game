@@ -1,7 +1,71 @@
+h5 {
+  text-decoration: underline;
+  position: relative;
+}
+.close_img {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+.advanced_item {
+  position: relative;
+}
 .advanced_img {
   width: 32px;
   cursor: pointer;
+  padding-top: 10px;
 }
+.close_img:hover,
 .advanced_img:hover {
   transform: scale(1.1);
+}
+.settings {
+  text-align: center;
+  width: 250px;
+  padding: 10px;
+  position: absolute;
+  left: -90px;
+  bottom: 40px;
+  font-weight: 700;
+  border: 3px solid rgb(11, 37, 16);
+  background-color: rgb(117, 228, 89);
+}
+.settings_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.settings_item label{
+  font-size: 12px;
+}
+.volume_control {
+  padding: 0 20px;
+}
+input[type='range'] {
+  width: 120px;
+  appearance: none;
+  outline: none;
+  height: 3px;
+  background-color: #021a09;
+  cursor: pointer;
+}
+input[type='range']::-webkit-slider-thumb {
+  outline: none;
+  appearance: none;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background-color: #021a09;
+}
+
+input[type='range']::-moz-range-thumb {
+  outline: none;
+  appearance: none;
+  height: 14px;
+  width: 14px;
+  background-color: #021a09;
+  border: none;
 }

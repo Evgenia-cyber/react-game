@@ -51,6 +51,7 @@ const App = () => {
   const [isGameEnd, setIsGameEnd] = React.useState(false);
   const [isFirstStart, setIsFirstStart] = React.useState(true);
   const [volume, setVolume] = React.useState(START_VOLUME);
+  const [customVolume, setCustomVolume] = React.useState(START_VOLUME);
 
   React.useEffect(() => {
     const getRandom = (max, step) => {
@@ -195,7 +196,7 @@ const App = () => {
               <Volume
                 volume={volume}
                 setVolume={setVolume}
-                fieldRef={fieldRef}
+                customVolume={customVolume}
               />
               <div className="close toolbar_item" onClick={handlerOnCloseClick}>
                 <img src={closeImg} alt="close" />
@@ -236,11 +237,14 @@ const App = () => {
 
       {isGameEnd !== isFirstStart && (
         <Modal
+        volume={volume}
+        setVolume={setVolume}
           handleOnPlayBtnClick={handleOnPlayBtnClick}
           isGameEnd={isGameEnd}
           score={score}
           bestScore={bestScore}
           setBestScore={setBestScore}
+          setCustomVolume={setCustomVolume}
         />
       )}
     </div>

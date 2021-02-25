@@ -21,7 +21,7 @@
   transition: all 0.6s ease;
 }
 .play_btn {
-  margin: 20px 0 30px;
+  margin: 20px 0 20px;
   cursor: pointer;
   background-size: 220%;
   border-radius: 10px;

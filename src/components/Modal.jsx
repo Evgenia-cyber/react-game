@@ -12,6 +12,9 @@ const Modal = ({
   score,
   bestScore,
   setBestScore,
+  volume,
+  setVolume,
+  setCustomVolume
 }) => {
   const [allScores, setAllScores] = React.useState(ALL_SCORES);
 
@@ -45,9 +48,8 @@ const Modal = ({
         <span onClick={handleOnPlayBtnClick}>PLAY</span>
       </button>
       <div className={classes.advanced}>
-        <Settings />
-        <ScoresStatistics
-        />
+        <Settings volume={volume} setVolume={setVolume} setCustomVolume={setCustomVolume}/>
+        <ScoresStatistics />
       </div>
       <div className={classes.attributes}>
         Icons made by{' '}

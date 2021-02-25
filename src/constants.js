@@ -23,7 +23,7 @@ const CURRENT_DIRECTION = RIGHT_DIRECTION;
 const QUANTITY_BEST_RESULTS = 10;
 const ALL_SCORES = Array.from(Array(QUANTITY_BEST_RESULTS), () => 0);
 
-const START_VOLUME = 0.1;
+const START_VOLUME = 0.5;
 
 export {
   FIELD_WIDTH,
