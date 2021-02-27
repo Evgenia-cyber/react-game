@@ -3,7 +3,7 @@ export const sound = {
   playSound(path, volume) {
     let audio = new Audio(path);
     audio.volume = volume;
-    if (this.audio) {
+    if (this.audio&&audio.onended) {
       this.audio.pause();
     }
     const promise = audio.play();
