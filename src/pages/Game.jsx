@@ -8,13 +8,13 @@ import {
   START_VOLUME,
 } from '../constants';
 import { sound } from '../utils/sound';
+import { changeDirection } from '../utils/functions';
 import moveSound from '../assets/sounds/move.mp3';
 
 import Modal from '../components/Modal';
 import GameField from '../components/GameField';
 
 import classes from './Game.module.css';
-import { changeDirection } from '../utils/functions';
 
 const Game = () => {
   const fieldRef = React.useRef();

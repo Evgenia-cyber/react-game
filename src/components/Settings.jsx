@@ -1,9 +1,11 @@
 import React from 'react';
-import classes from './Settings.module.css';
-import settingsImg from '../assets/img/settings.svg';
-import moveSound from '../assets/sounds/move.mp3';
-import closeImg from '../assets/img/close.svg';
+
 import { sound } from '../utils/sound';
+import settingsImg from '../assets/img/settings.svg';
+import closeImg from '../assets/img/close.svg';
+import moveSound from '../assets/sounds/move.mp3';
+
+import classes from './Settings.module.css';
 
 const Settings = ({ volume, setVolume, setCustomVolume }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);

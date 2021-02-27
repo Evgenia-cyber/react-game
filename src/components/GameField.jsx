@@ -11,6 +11,7 @@ import {
   RIGHT_KEYCODE,
 } from '../constants';
 import { sound } from '../utils/sound';
+import { changeDirection } from '../utils/functions';
 import appleImg from '../assets/img/apple.svg';
 import closeImg from '../assets/img/close.svg';
 import deadSound from '../assets/sounds/dead.mp3';
@@ -21,7 +22,6 @@ import Scores from '../components/Scores';
 import Volume from '../components/Volume';
 
 import classes from './GameField.module.css';
-import { changeDirection } from '../utils/functions';
 
 const GameField = ({
   snakeHead,

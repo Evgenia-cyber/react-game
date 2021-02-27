@@ -1,7 +1,9 @@
 import React from 'react';
-import classes from './ScoresStatistics.module.css';
-import scoresImg from '../assets/img/score.svg';
+
 import { ALL_SCORES } from '../constants';
+import scoresImg from '../assets/img/score.svg';
+
+import classes from './ScoresStatistics.module.css';
 
 const ScoresStatistics = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);

@@ -1,12 +1,14 @@
 import React from 'react';
-import { ALL_SCORES } from '../constants';
 
-import classes from './Modal.module.css';
+import { ALL_SCORES } from '../constants';
+import githubImg from '../assets/img/github.svg';
+import schoolImg from '../assets/img/rs_school_js.svg';
+
 import Scores from './Scores';
 import ScoresStatistics from './ScoresStatistics';
 import Settings from './Settings';
-import githubImg from '../assets/img/github.svg';
-import schoolImg from '../assets/img/rs_school_js.svg';
+
+import classes from './Modal.module.css';
 
 const Modal = ({
   handleOnPlayBtnClick,

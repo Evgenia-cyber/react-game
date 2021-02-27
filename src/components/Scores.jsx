@@ -2,7 +2,7 @@ import React from 'react';
 
 import appleImg from '../assets/img/apple.svg';
 import awardImg from '../assets/img/award.svg';
-import '../App.css';
+
 import classes from './Scores.module.css';
 
 const Scores = ({ score, bestScore }) => {
