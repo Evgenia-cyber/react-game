@@ -9,10 +9,6 @@ import {
   DOWN_KEYCODE,
   LEFT_KEYCODE,
   RIGHT_KEYCODE,
-  UP_DIRECTION,
-  DOWN_DIRECTION,
-  LEFT_DIRECTION,
-  RIGHT_DIRECTION,
 } from '../constants';
 import { sound } from '../utils/sound';
 import appleImg from '../assets/img/apple.svg';
@@ -25,6 +21,7 @@ import Scores from '../components/Scores';
 import Volume from '../components/Volume';
 
 import classes from './GameField.module.css';
+import { changeDirection } from '../utils/functions';
 
 const GameField = ({
   snakeHead,
@@ -113,15 +110,16 @@ const GameField = ({
     };
 
     const interval = setInterval(() => {
-      if (isFirstStart === isGameEnd) {
-        moveSnake();
-      }
       if (checkCollisionWithBoundaries() || checkSelfCollision()) {
         if (!isGameEnd) {
           sound.playSound(deadSound, volume, true);
         }
         setIsGameEnd(true);
         clearInterval(interval);
+      } else {
+        if (isFirstStart === isGameEnd) {
+          moveSnake();
+        }
       }
     }, SPEED);
 
@@ -129,31 +127,14 @@ const GameField = ({
   }, [direction, snakeHead, snakeBodyItems, apple, isFirstStart]);
 
   const handlerOnKeyDown = (event) => {
-    sound.playSound(moveSound, volume);
-    switch (event.keyCode) {
-      case UP_KEYCODE:
-        if (direction !== DOWN_DIRECTION) {
-          setDirection(UP_DIRECTION);
-        }
-        break;
-      case DOWN_KEYCODE:
-        if (direction !== UP_DIRECTION) {
-          setDirection(DOWN_DIRECTION);
-        }
-        break;
-      case LEFT_KEYCODE:
-        if (direction !== RIGHT_DIRECTION) {
-          setDirection(LEFT_DIRECTION);
-        }
-        break;
-      case RIGHT_KEYCODE:
-        if (direction !== LEFT_DIRECTION) {
-          setDirection(RIGHT_DIRECTION);
-        }
-        break;
-      default:
-        setDirection(RIGHT_DIRECTION);
+    const isUp = event.keyCode === UP_KEYCODE;
+    const isDown = event.keyCode === DOWN_KEYCODE;
+    const isLeft = event.keyCode === LEFT_KEYCODE;
+    const isRight = event.keyCode === RIGHT_KEYCODE;
+    if (isUp || isDown || isLeft || isRight) {
+      sound.playSound(moveSound, volume);
     }
+    changeDirection(direction, setDirection, isUp, isDown, isLeft, isRight);
   };
 
   const handlerOnCloseClick = () => {

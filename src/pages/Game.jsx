@@ -5,10 +5,6 @@ import {
   APPLE,
   SNAKE_BODY,
   CURRENT_DIRECTION,
-  RIGHT_DIRECTION,
-  LEFT_DIRECTION,
-  DOWN_DIRECTION,
-  UP_DIRECTION,
   START_VOLUME,
 } from '../constants';
 import { sound } from '../utils/sound';
@@ -18,6 +14,7 @@ import Modal from '../components/Modal';
 import GameField from '../components/GameField';
 
 import classes from './Game.module.css';
+import { changeDirection } from '../utils/functions';
 
 const Game = () => {
   const fieldRef = React.useRef();
@@ -33,7 +30,6 @@ const Game = () => {
   const [volume, setVolume] = React.useState(START_VOLUME);
   const [customVolume, setCustomVolume] = React.useState(START_VOLUME);
   const [touchStart, setTouchStart] = React.useState({ x: 0, y: 0 });
-  const [touchEnd, setTouchEnd] = React.useState({ x: 0, y: 0 });
 
   const handleOnPlayBtnClick = () => {
     fieldRef.current.focus();
@@ -45,47 +41,26 @@ const Game = () => {
     setIsFirstStart(false);
     setScore(0);
   };
-  
-  React.useEffect(() => {
-    const dif = { x: touchEnd.x - touchStart.x, y: touchEnd.y - touchStart.y };
-    if (Math.abs(dif.x) > Math.abs(dif.y)) {
-      if (dif.x > 0) {
-        if (direction !== LEFT_DIRECTION) {
-          setDirection(RIGHT_DIRECTION);
-        }
-      } else {
-        if (direction !== RIGHT_DIRECTION) {
-          setDirection(LEFT_DIRECTION);
-        }
-      }
-    } else {
-      if (dif.y > 0) {
-        if (direction !== UP_DIRECTION) {
-          setDirection(DOWN_DIRECTION);
-        }
-      } else {
-        if (direction !== DOWN_DIRECTION) {
-          setDirection(UP_DIRECTION);
-        }
-      }
-    }
-  }, [touchStart, touchEnd]);
 
   const handlerOnTouchStart = (event) => {
     sound.playSound(moveSound, volume);
-    const touch = {
+    setTouchStart({
       x: event.changedTouches[0].clientX,
       y: event.changedTouches[0].clientY,
-    };
-    setTouchStart(touch);
+    });
   };
 
   const handlerOnTouchEnd = (event) => {
-    const touch = {
-      x: event.changedTouches[0].clientX,
-      y: event.changedTouches[0].clientY,
+    const dif = {
+      x: event.changedTouches[0].clientX - touchStart.x,
+      y: event.changedTouches[0].clientY - touchStart.y,
     };
-    setTouchEnd(touch);
+    const isVerticalMove = Math.abs(dif.x) < Math.abs(dif.y);
+    const isUp = isVerticalMove && dif.y < 0;
+    const isDown = isVerticalMove && dif.y > 0;
+    const isLeft = !isVerticalMove && dif.x < 0;
+    const isRight = !isVerticalMove && dif.x > 0;
+    changeDirection(direction, setDirection, isUp, isDown, isLeft, isRight);
   };
 
   return (
