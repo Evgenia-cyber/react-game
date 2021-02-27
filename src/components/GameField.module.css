@@ -1,0 +1,51 @@
+.container {
+  background-color: #06902d;
+}
+.container:focus {
+  outline: none;
+}
+.toolbar {
+  height: 50px;
+  background-color: #399645;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.right {
+  display: flex;
+}
+.toolbar_item {
+  padding: 0 15px;
+}
+.close img {
+  cursor: pointer;
+}
+.close img:hover{
+  transform: scale(1.1);
+}
+.close img {
+  width: 20px;
+}
+.game_field {
+  background-color: #64c752;
+  margin: 20px;
+  position: relative;
+}
+.game_item {
+  width: 20px;
+  height: 20px;
+}
+.snake_head,
+.snake_body,
+.apple {
+  position: absolute;
+}
+.snake_head,
+.snake_body {
+  border-radius: 30%;
+  background: linear-gradient(rgb(3, 51, 27), transparent),
+    linear-gradient(to top left, lime, transparent),
+    linear-gradient(to top right, rgb(11, 17, 11), transparent);
+  border: 1px solid rgb(29, 41, 29);
+  box-sizing: border-box;
+}
