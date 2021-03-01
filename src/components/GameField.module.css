@@ -43,9 +43,21 @@
 .snake_head,
 .snake_body {
   border-radius: 30%;
+  border: 1px solid rgb(29, 41, 29);
+  box-sizing: border-box;
+}
+.green{
   background: linear-gradient(rgb(3, 51, 27), transparent),
     linear-gradient(to top left, lime, transparent),
     linear-gradient(to top right, rgb(11, 17, 11), transparent);
-  border: 1px solid rgb(29, 41, 29);
-  box-sizing: border-box;
+}
+.blue{
+  background: linear-gradient(rgb(39, 14, 150), transparent),
+    linear-gradient(to top left, rgb(31, 231, 155), transparent),
+    linear-gradient(to top right, rgb(11, 17, 11), transparent);
+}
+.red{
+  background: linear-gradient(rgb(255, 22, 6), transparent),
+    linear-gradient(to top left, rgb(197, 238, 15), transparent),
+    linear-gradient(to top right, rgb(11, 17, 11), transparent);
 }

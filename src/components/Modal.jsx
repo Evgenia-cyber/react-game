@@ -19,6 +19,8 @@ const Modal = ({
   volume,
   setVolume,
   setCustomVolume,
+  customSettings,
+  setCustomSettings,
 }) => {
   const [allScores, setAllScores] = React.useState(ALL_SCORES);
 
@@ -56,6 +58,8 @@ const Modal = ({
           volume={volume}
           setVolume={setVolume}
           setCustomVolume={setCustomVolume}
+          customSettings={customSettings}
+          setCustomSettings={setCustomSettings}
         />
         <ScoresStatistics />
       </div>

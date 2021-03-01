@@ -6,6 +6,11 @@ import {
   SNAKE_BODY,
   CURRENT_DIRECTION,
   START_VOLUME,
+  SPEED,
+  COLOR,
+  FIELD_WIDTH,
+  FIELD_HEIGHT,
+  STEP,
 } from '../constants';
 import { sound } from '../utils/sound';
 import { changeDirection } from '../utils/functions';
@@ -30,6 +35,12 @@ const Game = () => {
   const [volume, setVolume] = React.useState(START_VOLUME);
   const [customVolume, setCustomVolume] = React.useState(START_VOLUME);
   const [touchStart, setTouchStart] = React.useState({ x: 0, y: 0 });
+    const [customSettings, setCustomSettings] = React.useState({
+      widthInCells: FIELD_WIDTH / STEP,
+      heightInCells: FIELD_HEIGHT / STEP,
+      color: COLOR,
+      speed: SPEED,
+    });
 
   const handleOnPlayBtnClick = () => {
     fieldRef.current.focus();
@@ -90,6 +101,7 @@ const Game = () => {
           isGameEnd={isGameEnd}
           setIsGameEnd={setIsGameEnd}
           fieldRef={fieldRef}
+          customSettings={customSettings}
         />
       </div>
 
@@ -103,6 +115,7 @@ const Game = () => {
           bestScore={bestScore}
           setBestScore={setBestScore}
           setCustomVolume={setCustomVolume}
+          customSettings={customSettings} setCustomSettings={setCustomSettings}
         />
       )}
     </div>

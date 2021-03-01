@@ -2,11 +2,11 @@ const FIELD_WIDTH = 400;
 const FIELD_HEIGHT = 400;
 const STEP = 20;
 const SPEED = 200;
-const APPLE = { left: 300, top: 100 };
-const SNAKE_HEAD = { left: 80, top: 300 };
+const APPLE = { left: 280, top: 100 };
+const SNAKE_HEAD = { left: 80, top: 280 };
 const SNAKE_BODY = [
-  { left: 60, top: 300 },
-  { left: 40, top: 300 },
+  { left: 60, top: 280 },
+  { left: 40, top: 280 },
 ];
 
 const UP_KEYCODE = 38;
@@ -24,6 +24,12 @@ const QUANTITY_BEST_RESULTS = 10;
 const ALL_SCORES = Array.from(Array(QUANTITY_BEST_RESULTS), () => 0);
 
 const START_VOLUME = 0.5;
+const COLOR = 'green';
+const MAX_SPEED = SPEED - 150;
+const FIELD_WIDTH_MAX_IN_CELLS = 60;
+const FIELD_WIDTH_MIN_IN_CELLS = 15;
+const FIELD_HEIGHT_MAX_IN_CELLS = 25;
+const FIELD_HEIGHT_MIN_IN_CELLS = 15;
 
 export {
   FIELD_WIDTH,
@@ -43,5 +49,11 @@ export {
   LEFT_DIRECTION,
   RIGHT_DIRECTION,
   ALL_SCORES,
-  START_VOLUME
+  START_VOLUME,
+  COLOR,
+  MAX_SPEED,
+  FIELD_WIDTH_MAX_IN_CELLS,
+  FIELD_HEIGHT_MAX_IN_CELLS,
+  FIELD_WIDTH_MIN_IN_CELLS,
+  FIELD_HEIGHT_MIN_IN_CELLS,
 };

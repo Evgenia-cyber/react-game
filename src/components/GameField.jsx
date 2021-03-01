@@ -1,10 +1,7 @@
 import React from 'react';
 
 import {
-  FIELD_HEIGHT,
-  FIELD_WIDTH,
   STEP,
-  SPEED,
   UP_KEYCODE,
   DOWN_KEYCODE,
   LEFT_KEYCODE,
@@ -42,14 +39,16 @@ const GameField = ({
   isGameEnd,
   setIsGameEnd,
   fieldRef,
+  customSettings,
 }) => {
   const style = {
     field: {
-      width: `${FIELD_WIDTH}px`,
-      height: `${FIELD_HEIGHT}px`,
+      width: `${customSettings.widthInCells * STEP}px`,
+      height: `${customSettings.heightInCells * STEP}px`,
     },
   };
-
+const field_width = customSettings.widthInCells*STEP;
+const field_height = customSettings.heightInCells*STEP;
   React.useEffect(() => {
     const getRandom = (max, step) => {
       return Math.floor(Math.random() * (max / step)) * step;
@@ -64,8 +63,8 @@ const GameField = ({
     };
     const createApple = () => {
       let newApple = {
-        left: getRandom(FIELD_WIDTH, STEP),
-        top: getRandom(FIELD_HEIGHT, STEP),
+        left: getRandom(field_width, STEP),
+        top: getRandom(field_height, STEP),
       };
       if (checkIsAppleCreatedInSnakeBody(newApple)) {
         newApple = createApple();
@@ -82,8 +81,8 @@ const GameField = ({
       return (
         snakeHead.left < 0 ||
         snakeHead.top < 0 ||
-        snakeHead.left > FIELD_WIDTH - STEP ||
-        snakeHead.top > FIELD_HEIGHT - STEP
+        snakeHead.left > field_width - STEP ||
+        snakeHead.top > field_height - STEP
       );
     };
 
@@ -121,7 +120,7 @@ const GameField = ({
           moveSnake();
         }
       }
-    }, SPEED);
+    }, customSettings.speed);
 
     return () => clearInterval(interval);
   }, [direction, snakeHead, snakeBodyItems, apple, isFirstStart]);
@@ -140,6 +139,13 @@ const GameField = ({
   const handlerOnCloseClick = () => {
     setIsGameEnd(true);
   };
+
+const colorClass= customSettings.color ===
+  'green'
+    ? classes.green
+    : customSettings.color === 'blue'
+    ? classes.blue
+    : classes.red;
 
   return (
     <div
@@ -175,7 +181,12 @@ const GameField = ({
         </div>
         <div className={classes.snake}>
           <div
-            className={classes.snake_head + ' ' + classes.game_item}
+            className={
+              classes.snake_head +
+                ' ' +
+                classes.game_item +
+                ' ' +colorClass
+            }
             style={{
               left: `${snakeHead.left}px`,
               top: `${snakeHead.top}px`,
@@ -185,7 +196,7 @@ const GameField = ({
           {snakeBodyItems.map((item, index) => (
             <div
               key={index + '' + item.left + item.top}
-              className={classes.snake_body + ' ' + classes.game_item}
+              className={classes.snake_body + ' ' + classes.game_item+' '+colorClass}
               style={{
                 left: `${item.left}px`,
                 top: `${item.top}px`,

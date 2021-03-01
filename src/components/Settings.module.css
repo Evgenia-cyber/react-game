@@ -1,6 +1,5 @@
 h5 {
   text-decoration: underline;
-  position: relative;
 }
 .close_img {
   position: absolute;
@@ -24,10 +23,11 @@ h5 {
 }
 .settings {
   text-align: center;
-  width: 250px;
-  padding: 10px;
+  width: 400px;
+  padding: 10px 15px;
+  box-sizing: border-box;
   position: absolute;
-  left: -90px;
+  left: -150px;
   bottom: 40px;
   font-weight: 700;
   border: 3px solid rgb(11, 37, 16);
@@ -35,15 +35,67 @@ h5 {
 }
 .settings_item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
-.settings_item label{
+.settings_item label {
   font-size: 12px;
+  margin: 15px 25px 15px 0;
 }
-.volume_control {
-  padding: 0 20px;
+.field_control input {
+margin: 0 5px;
+outline: none;
 }
+.field_control label:last-of-type {
+  margin-right: 0px;
+}
+.container {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  transition: all 0.3s ease; 
+}
+.container input {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 50%;
+}
+.container:hover input ~ .checkmark {
+  background-color: rgb(71, 221, 37);
+  transition: all 0.3s ease; 
+}
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+.container .checkmark:after {
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #021a09;
+}
+
 input[type='range'] {
   width: 120px;
   appearance: none;
