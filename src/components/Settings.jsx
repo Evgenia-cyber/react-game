@@ -23,32 +23,17 @@ const Settings = ({
   setCustomSettings,
 }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [localSettings, setLocalSettings] = React.useState(customSettings);
 
   const handlerOnChange = (event) => {
     const target = event.target;
     const name = target.name;
     const value = target.name === 'color' ? target.value : +target.value;
-    setCustomSettings((prevState) => ({ ...prevState, [name]: value }));
+    setLocalSettings((prevState) => ({ ...prevState, [name]: value }));
   };
-  const handlerOnChangeFieldSize = (event) => {
-    const target = event.target;
-    const name = target.name;
-    let value = +target.value;
-    if(name==="widthInCells"){
-      if(value<FIELD_WIDTH_MIN_IN_CELLS){
-        value=FIELD_WIDTH_MIN_IN_CELLS
-      }else if(value>FIELD_WIDTH_MAX_IN_CELLS){
-        value=FIELD_WIDTH_MAX_IN_CELLS
-      }
-    }
-    if(name==="heightInCells"){
-      if(value<FIELD_HEIGHT_MIN_IN_CELLS){
-        value=FIELD_HEIGHT_MIN_IN_CELLS
-      }else if(value>FIELD_HEIGHT_MAX_IN_CELLS){
-        value=FIELD_HEIGHT_MAX_IN_CELLS
-      }
-    }
-    setCustomSettings((prevState) => ({ ...prevState, [name]: value }));
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setCustomSettings(localSettings);
   };
 
   const handlerOnMouseEvent = () => {
@@ -82,6 +67,7 @@ const Settings = ({
           />
           <h5>SETTINGS</h5>
 
+<form onSubmit={handleSubmit}>
           <div className={classes.field_control + ' ' + classes.settings_item}>
             <label>FIELD:</label>
             <label>
@@ -91,8 +77,8 @@ const Settings = ({
                 name="widthInCells"
                 max={FIELD_WIDTH_MAX_IN_CELLS}
                 min={FIELD_WIDTH_MIN_IN_CELLS}
-                value={customSettings.widthInCells}
-                onChange={handlerOnChangeFieldSize}
+                value={localSettings.widthInCells}
+                onChange={handlerOnChange}
               />
               cells
             </label>
@@ -103,8 +89,8 @@ const Settings = ({
                 name="heightInCells"
                 max={FIELD_HEIGHT_MAX_IN_CELLS}
                 min={FIELD_HEIGHT_MIN_IN_CELLS}
-                value={customSettings.heightInCells}
-                onChange={handlerOnChangeFieldSize}
+                value={localSettings.heightInCells}
+                onChange={handlerOnChange}
               />
               cells
             </label>
@@ -117,7 +103,7 @@ const Settings = ({
                 type="radio"
                 name="speed"
                 value={SPEED}
-                checked={customSettings.speed === SPEED}
+                checked={localSettings.speed === SPEED}
                 onChange={handlerOnChange}
               />
               <span className={classes.checkmark}></span>slow
@@ -127,7 +113,7 @@ const Settings = ({
                 type="radio"
                 name="speed"
                 value={MAX_SPEED}
-                checked={customSettings.speed === MAX_SPEED}
+                checked={localSettings.speed === MAX_SPEED}
                 onChange={handlerOnChange}
               />
               <span className={classes.checkmark}></span>fast
@@ -141,7 +127,7 @@ const Settings = ({
                 type="radio"
                 name="color"
                 value="green"
-                checked={customSettings.color === 'green'}
+                checked={localSettings.color === 'green'}
                 onChange={handlerOnChange}
               />
               <span className={classes.checkmark}></span>green
@@ -151,7 +137,7 @@ const Settings = ({
                 type="radio"
                 name="color"
                 value="red"
-                checked={customSettings.color === 'red'}
+                checked={localSettings.color === 'red'}
                 onChange={handlerOnChange}
               />
               <span className={classes.checkmark}></span>red
@@ -161,7 +147,7 @@ const Settings = ({
                 type="radio"
                 name="color"
                 value="blue"
-                checked={customSettings.color === 'blue'}
+                checked={localSettings.color === 'blue'}
                 onChange={handlerOnChange}
               />
               <span className={classes.checkmark}></span>blue
@@ -181,6 +167,9 @@ const Settings = ({
               onChange={handlerOnChangeVolume}
             />
           </div>
+          <input type="submit" value="SAVE SETTINGS" className="play_btn"/>
+          </form>
+
         </div>
       )}
     </div>
