@@ -1,0 +1,30 @@
+h5 {
+  text-decoration: underline;
+}
+.advanced_item {
+  position: relative;
+}
+.advanced_img {
+  width: 30px;
+  cursor: pointer;
+  padding-top: 10px;
+}
+.advanced_img:hover {
+  transform: scale(1.1);
+}
+.scores {
+  text-align: center;
+  width: 150px;
+  padding: 10px;
+  position: absolute;
+  left: 45px;
+  top: -200px;
+  font-weight: 700;
+  border: 3px solid rgb(11, 37, 16);
+  background-color: rgb(117, 228, 89);
+}
+.scores_item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dotted black;
+}

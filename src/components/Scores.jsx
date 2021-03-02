@@ -1,0 +1,27 @@
+import React from 'react';
+
+import appleImg from '../assets/img/apple.svg';
+import awardImg from '../assets/img/award.svg';
+
+import classes from './Scores.module.css';
+
+const Scores = ({ score, bestScore }) => {
+  return (
+    <div className={classes.left}>
+      <div className={classes.toolbar_item}>
+        <img className={classes.score_img} src={appleImg} alt="score" />
+        <span className={classes.score}>{score}</span>
+      </div>
+      <div className={classes.toolbar_item}>
+        <img
+          className={classes.bestscore_img}
+          src={awardImg}
+          alt="best score"
+        />
+        <span className={classes.score}>{bestScore}</span>
+      </div>
+    </div>
+  );
+};
+
+export default Scores;

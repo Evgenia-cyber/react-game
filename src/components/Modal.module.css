@@ -1,0 +1,50 @@
+.modal.active {
+  width: 100%;
+  height: 100%;
+  transition: all 1.2s ease;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(33, 156, 60, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #090e3e;
+  transform: translate(0, -200%);
+  color: #021a09;
+}
+.modal.active {
+  transform: translate(0, 0);
+  transition: all 0.6s ease;
+}
+.advanced {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer {
+  font-size: 12px;
+  margin: 0 10px;
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+}
+footer a {
+  color: #28522e;
+}
+footer a img {
+  height: 15px;
+}
+footer p{
+  margin: 10px 0;
+}
+.author{
+  font-weight: 700;
+}
+.rs_school {
+  padding: 0 15px 0;
+}
